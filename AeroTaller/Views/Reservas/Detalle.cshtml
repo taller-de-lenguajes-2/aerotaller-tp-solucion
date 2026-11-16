@@ -1,0 +1,48 @@
+@model ReservaDetalleViewModel
+@{
+    ViewData["Title"] = $"Reserva {Model.Reserva.Id}";
+    ReservaListadoViewModel reserva = Model.Reserva;
+}
+
+<h1>Reserva #@reserva.Id</h1>
+
+<dl class="ficha">
+    <dt>Vuelo</dt>    <dd><a asp-controller="Vuelos" asp-action="Detalle" asp-route-id="@reserva.VueloId">@reserva.Vuelo</a> · @reserva.Ruta</dd>
+    <dt>Salida</dt>   <dd>@reserva.Salida</dd>
+    <dt>Pasajero</dt> <dd><a asp-controller="Pasajeros" asp-action="Detalle" asp-route-id="@reserva.PasajeroId">@reserva.Pasajero</a></dd>
+    <dt>Asiento</dt>  <dd>@reserva.Asiento</dd>
+    <dt>Estado</dt>   <dd>@reserva.Estado</dd>
+</dl>
+
+@if (reserva.PuedeCancelarse)
+{
+    <form asp-action="Cancelar" asp-route-id="@reserva.Id" method="post" class="acciones"
+          onsubmit="return confirm('¿Cancelar la reserva?');">
+        <button type="submit" class="peligro">Cancelar reserva</button>
+    </form>
+}
+
+<h2>Equipaje</h2>
+@if (Model.Equipaje.Count == 0)
+{
+    <p>Sin equipaje registrado.</p>
+}
+else
+{
+    <table>
+        <thead><tr><th>Tipo</th><th>Peso</th></tr></thead>
+        <tbody>
+            @foreach (Equipaje pieza in Model.Equipaje)
+            {
+                <tr><td>@pieza.Tipo</td><td>@pieza.PesoKg.ToString("0.#") kg</td></tr>
+            }
+        </tbody>
+        <tfoot><tr><th>Total</th><th>@Model.TotalKg.ToString("0.#") kg</th></tr></tfoot>
+    </table>
+}
+@if (reserva.PuedeCancelarse)
+{
+    <p><a class="boton secundario" asp-controller="Equipaje" asp-action="Crear" asp-route-reservaId="@reserva.Id">+ Agregar equipaje</a></p>
+}
+
+<p><a asp-action="Index">← Volver a las reservas</a></p>

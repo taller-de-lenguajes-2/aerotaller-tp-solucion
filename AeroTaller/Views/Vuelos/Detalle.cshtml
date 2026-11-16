@@ -1,0 +1,55 @@
+@model VueloDetalleViewModel
+@{
+    ViewData["Title"] = $"Vuelo {Model.Numero}";
+}
+
+<h1>Vuelo @Model.Numero</h1>
+
+<dl class="ficha">
+    <dt>Ruta</dt>      <dd>@Model.Ruta</dd>
+    <dt>Sale</dt>      <dd>@Model.Salida</dd>
+    <dt>Llega</dt>     <dd>@Model.Llegada</dd>
+    <dt>Precio</dt>    <dd>@Model.Precio</dd>
+    <dt>Ocupación</dt> <dd>@Model.Ocupados de @Model.Capacidad asientos</dd>
+    <dt>Bodega</dt>    <dd>@Model.KilosEnBodega.ToString("0.#") kg despachados</dd>
+</dl>
+
+<h2>Mapa de asientos</h2>
+@if (Model.PuedeReservar)
+{
+    <p class="nota">Tocá un asiento libre para reservarlo.</p>
+}
+else
+{
+    <p class="nota">Este vuelo ya no admite reservas.</p>
+}
+
+@* La vista solo dibuja: la matriz (filas × asientos) ya viene armada en el ViewModel *@
+<div class="avion">
+    @for (int i = 0; i < Model.Mapa.Count; i++)
+    {
+        <div class="fila">
+            <span class="numero-fila">@(i + 1)</span>
+            @for (int j = 0; j < Model.Mapa[i].Count; j++)
+            {
+                AsientoViewModel asiento = Model.Mapa[i][j];
+                if (j == 3)
+                {
+                    <span class="pasillo"></span>
+                }
+                if (asiento.Ocupado || !Model.PuedeReservar)
+                {
+                    <span class="asiento @(asiento.Ocupado ? "ocupado" : "")" title="@asiento.Codigo">@asiento.Codigo[^1]</span>
+                }
+                else
+                {
+                    <a class="asiento libre" title="Reservar @asiento.Codigo"
+                       asp-controller="Reservas" asp-action="Crear"
+                       asp-route-vueloId="@Model.Id" asp-route-asiento="@asiento.Codigo">@asiento.Codigo[^1]</a>
+                }
+            }
+        </div>
+    }
+</div>
+
+<p><a asp-action="Index">← Volver a los vuelos</a></p>

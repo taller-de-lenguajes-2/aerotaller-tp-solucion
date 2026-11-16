@@ -1,0 +1,51 @@
+@model PasajeroDetalleViewModel
+@{
+    ViewData["Title"] = Model.Nombre;
+    bool esAdmin = Context.Session.GetString(AutenticacionService.ClaveRol) == Roles.Admin;
+}
+
+<h1>@Model.Nombre</h1>
+
+<dl class="ficha">
+    <dt>DNI</dt>   <dd>@Model.Dni</dd>
+    <dt>Email</dt> <dd>@Model.Email</dd>
+</dl>
+
+<p class="acciones">
+    <a class="boton" asp-action="Editar" asp-route-id="@Model.Id">Editar</a>
+    @if (esAdmin)
+    {
+        <form asp-action="Eliminar" asp-route-id="@Model.Id" method="post"
+              onsubmit="return confirm('¿Eliminar a @Model.Nombre?');">
+            <button type="submit" class="peligro">Eliminar</button>
+        </form>
+    }
+</p>
+
+<h2>Reservas</h2>
+@if (Model.Reservas.Count == 0)
+{
+    <p>Todavía no tiene reservas.</p>
+}
+else
+{
+    <table>
+        <thead>
+            <tr><th>Vuelo</th><th>Ruta</th><th>Salida</th><th>Asiento</th><th>Estado</th></tr>
+        </thead>
+        <tbody>
+            @foreach (ReservaListadoViewModel reserva in Model.Reservas)
+            {
+                <tr class="@(reserva.Cancelada ? "pasado" : "")">
+                    <td><a asp-controller="Reservas" asp-action="Detalle" asp-route-id="@reserva.Id">@reserva.Vuelo</a></td>
+                    <td>@reserva.Ruta</td>
+                    <td>@reserva.Salida</td>
+                    <td>@reserva.Asiento</td>
+                    <td>@reserva.Estado</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+<p><a asp-action="Index">← Volver a los pasajeros</a></p>

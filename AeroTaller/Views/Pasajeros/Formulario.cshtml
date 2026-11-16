@@ -1,0 +1,31 @@
+@* Una sola vista para Crear y Editar: el ViewModel dice cuál es (EsNuevo) *@
+@model PasajeroFormViewModel
+@{
+    ViewData["Title"] = Model.EsNuevo ? "Nuevo pasajero" : "Editar pasajero";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<form asp-action="@(Model.EsNuevo ? "Crear" : "Editar")" asp-route-id="@Model.Id" method="post" class="formulario">
+    <div asp-validation-summary="ModelOnly"></div>
+
+    <label asp-for="Nombre"></label>
+    <input asp-for="Nombre" />
+    <span asp-validation-for="Nombre"></span>
+
+    <label asp-for="Dni"></label>
+    <input asp-for="Dni" inputmode="numeric" />
+    <span asp-validation-for="Dni"></span>
+
+    <label asp-for="Email"></label>
+    <input asp-for="Email" />
+    <span asp-validation-for="Email"></span>
+
+    <button type="submit">Guardar</button>
+</form>
+
+<p><a asp-action="Index">← Volver a los pasajeros</a></p>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

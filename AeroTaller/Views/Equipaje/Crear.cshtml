@@ -1,0 +1,35 @@
+@model EquipajeCrearViewModel
+@{
+    ViewData["Title"] = "Agregar equipaje";
+}
+
+<h1>Agregar equipaje</h1>
+@if (Model.Reserva is not null)
+{
+    <p class="nota">Reserva #@Model.Reserva.Id · @Model.Reserva.Pasajero · @Model.Reserva.Vuelo (@Model.Reserva.Ruta)</p>
+}
+
+<form asp-action="Crear" method="post" class="formulario">
+    <div asp-validation-summary="ModelOnly"></div>
+    <input asp-for="ReservaId" type="hidden" />
+
+    <label asp-for="Tipo"></label>
+    @* Html.GetEnumSelectList arma las opciones a partir del enum TipoEquipaje *@
+    <select asp-for="Tipo" asp-items="Html.GetEnumSelectList<TipoEquipaje>()">
+        <option value="">— Elegir —</option>
+    </select>
+    <span asp-validation-for="Tipo"></span>
+
+    <label asp-for="PesoKg"></label>
+    <input asp-for="PesoKg" step="0.1" />
+    <span asp-validation-for="PesoKg"></span>
+
+    <button type="submit">Agregar</button>
+</form>
+
+<p class="nota">Bodega: hasta @Equipaje.PesoMaximoBodega kg por pieza y @Equipaje.PiezasMaximasBodega piezas. Mano: una pieza de hasta @Equipaje.PesoMaximoMano kg.</p>
+<p><a asp-controller="Reservas" asp-action="Detalle" asp-route-id="@Model.ReservaId">← Volver a la reserva</a></p>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

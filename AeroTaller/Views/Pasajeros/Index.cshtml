@@ -1,0 +1,33 @@
+@model List<Pasajero>
+@{
+    ViewData["Title"] = "Pasajeros";
+}
+
+<h1>Pasajeros</h1>
+
+<form asp-action="Index" method="get" class="buscador">
+    <input name="buscar" value="@ViewData["Buscar"]" placeholder="Nombre o DNI" />
+    <button type="submit">Buscar</button>
+    <a class="boton secundario" asp-action="Crear">+ Nuevo pasajero</a>
+</form>
+
+<table>
+    <thead>
+        <tr><th>Nombre</th><th>DNI</th><th>Email</th></tr>
+    </thead>
+    <tbody>
+        @foreach (Pasajero pasajero in Model)
+        {
+            <tr>
+                <td><a asp-action="Detalle" asp-route-id="@pasajero.Id">@pasajero.Nombre</a></td>
+                <td>@pasajero.Dni</td>
+                <td>@(pasajero.Email ?? "—")</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@if (Model.Count == 0)
+{
+    <p>No hay pasajeros que coincidan con «@ViewData["Buscar"]».</p>
+}

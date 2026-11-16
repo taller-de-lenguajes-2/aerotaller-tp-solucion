@@ -1,0 +1,35 @@
+@model ReservaCrearViewModel
+@{
+    ViewData["Title"] = "Nueva reserva";
+}
+
+<h1>Nueva reserva</h1>
+
+<form asp-action="Crear" method="post" class="formulario">
+    <div asp-validation-summary="ModelOnly"></div>
+
+    <label asp-for="VueloId"></label>
+    <select asp-for="VueloId" asp-items="Model.Vuelos">
+        <option value="">— Elegir —</option>
+    </select>
+    <span asp-validation-for="VueloId"></span>
+
+    <label asp-for="PasajeroId"></label>
+    <select asp-for="PasajeroId" asp-items="Model.Pasajeros">
+        <option value="">— Elegir —</option>
+    </select>
+    <span asp-validation-for="PasajeroId"></span>
+
+    <label asp-for="Asiento"></label>
+    <input asp-for="Asiento" placeholder="12C" />
+    <span asp-validation-for="Asiento"></span>
+
+    <button type="submit">Reservar</button>
+</form>
+
+<p class="nota">¿No sabés qué asiento está libre? Mirá el mapa en el detalle del vuelo.</p>
+<p><a asp-action="Index">← Volver a las reservas</a></p>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

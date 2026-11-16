@@ -1,0 +1,56 @@
+/* Misma base que la clínica de la cátedra, con un par de piezas propias (mapa de asientos, barras) */
+body { margin: 0; font-family: system-ui, "Segoe UI", sans-serif; color: #1b2230; background: #f6f7f9; }
+header { display: flex; gap: 2rem; align-items: center; padding: 0.9rem 2rem; background: #12355b; flex-wrap: wrap; }
+header a { color: #fff; text-decoration: none; }
+header .marca { font-weight: 700; font-size: 1.2rem; letter-spacing: 0.02em; }
+nav { display: flex; gap: 1.2rem; flex-wrap: wrap; }
+main { max-width: 900px; margin: 2rem auto; padding: 0 1rem; }
+table { width: 100%; border-collapse: collapse; background: #fff; }
+th, td { padding: 0.5rem 0.8rem; border-bottom: 1px solid #e1e5eb; text-align: left; }
+th { background: #eaf0f6; }
+dt { font-weight: 600; margin-top: 0.6rem; }
+dd { margin: 0; }
+a { color: #1d5fbf; }
+.nota { color: #5b6573; }
+footer { max-width: 900px; margin: 3rem auto 1.5rem; padding: 0 1rem; color: #5b6573; font-size: 0.85rem; }
+.buscador, .filtros { display: flex; gap: 0.6rem; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; }
+.filtros a.activo { font-weight: 700; text-decoration: none; color: #1b2230; }
+.formulario { display: grid; gap: 0.3rem; max-width: 380px; }
+.formulario label { font-weight: 600; margin-top: 0.6rem; }
+input, select { padding: 0.4rem 0.6rem; border: 1px solid #c7ced8; border-radius: 6px; font: inherit; }
+button, .boton { padding: 0.45rem 1rem; border: 0; border-radius: 6px; background: #12355b; color: #fff; font: inherit; cursor: pointer; text-decoration: none; display: inline-block; }
+.boton.secundario { background: #e3ecf7; color: #12355b; margin-left: auto; }
+button.peligro { background: #b42318; }
+.formulario button { margin-top: 1rem; justify-self: start; }
+.acciones { display: flex; gap: 0.6rem; align-items: center; }
+.acciones form { margin: 0; }
+tr.pasado td { color: #9aa3ae; }
+h2 { margin-top: 2rem; }
+.ficha { display: grid; grid-template-columns: max-content 1fr; gap: 0.3rem 1.2rem; }
+.ficha dt { margin: 0; }
+.field-validation-error { color: #b42318; font-size: 0.9rem; }
+.input-validation-error { border-color: #b42318; background: #fef3f2; }
+.validation-summary-errors { color: #b42318; background: #fef3f2; border: 1px solid #fda29b; border-radius: 6px; padding: 0.5rem 1rem; }
+.validation-summary-errors ul { margin: 0; padding-left: 1.2rem; }
+.validation-summary-valid { display: none; }
+.usuario { margin-left: auto; display: flex; gap: 1rem; align-items: center; color: #dbe5f1; }
+.usuario form { margin: 0; }
+button.enlace { background: none; padding: 0; color: #fff; text-decoration: underline; }
+.mensaje { padding: 0.6rem 1rem; border-radius: 6px; }
+.mensaje.ok { background: #ecfdf3; border: 1px solid #a6f4c5; color: #05603a; }
+.mensaje.error { background: #fef3f2; border: 1px solid #fda29b; color: #b42318; }
+.aviso-falso { background: #fff4d6; color: #7a4d00; text-align: center; padding: 0.4rem; font-size: 0.9rem; }
+
+/* Barra de ocupación del tablero */
+.barra { display: inline-block; width: 120px; height: 10px; background: #e3e8ee; border-radius: 5px; overflow: hidden; vertical-align: middle; margin-right: 0.4rem; }
+.barra span { display: block; height: 100%; background: #1d5fbf; }
+
+/* Mapa de asientos: una fila del avión por renglón, pasillo entre C y D */
+.avion { display: inline-flex; flex-direction: column; gap: 0.35rem; padding: 1.2rem 1.4rem; background: #fff; border: 2px solid #c7ced8; border-radius: 40px 40px 12px 12px; }
+.fila { display: flex; gap: 0.35rem; align-items: center; }
+.numero-fila { width: 1.6rem; text-align: right; color: #5b6573; font-size: 0.8rem; margin-right: 0.3rem; }
+.pasillo { width: 1.2rem; }
+.asiento { width: 2rem; height: 2rem; display: inline-grid; place-items: center; border-radius: 6px 6px 3px 3px; background: #e3e8ee; color: #5b6573; font-size: 0.8rem; text-decoration: none; }
+.asiento.libre { background: #d1f2e0; color: #05603a; }
+.asiento.libre:hover { background: #12355b; color: #fff; }
+.asiento.ocupado { background: #9aa3ae; color: #fff; }

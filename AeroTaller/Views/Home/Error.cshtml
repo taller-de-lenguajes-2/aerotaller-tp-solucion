@@ -1,0 +1,10 @@
+@model ErrorViewModel
+@{
+    ViewData["Title"] = "Algo salió mal";
+}
+
+<h1>Algo salió mal</h1>
+<p>No pudimos completar lo que pediste. El error quedó registrado y lo vamos a revisar.</p>
+@* Nunca el detalle técnico (ex.Message, StackTrace): solo un código para buscarlo en logs/ *@
+<p class="nota">Código para soporte: <code>@Model.RequestId</code></p>
+<p><a asp-controller="Home" asp-action="Index">← Volver al inicio</a></p>

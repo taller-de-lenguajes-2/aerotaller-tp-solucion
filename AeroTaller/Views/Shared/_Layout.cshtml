@@ -1,0 +1,74 @@
+@* @inject: una vista también puede pedirle cosas al contenedor (desafío 7) *@
+@inject IConfiguration Configuracion
+@{
+    string? rol = Context.Session.GetString(AutenticacionService.ClaveRol);
+    bool datosFalsos = Configuracion["OrigenDeDatos"] == "Falso";
+}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    @* Cada vista pone su título en ViewData["Title"] *@
+    <title>@ViewData["Title"] · AeroTaller</title>
+    <link rel="stylesheet" href="~/css/sitio.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <a class="marca" asp-controller="Home" asp-action="Index">✈ AeroTaller</a>
+        <nav>
+            <a asp-controller="Vuelos" asp-action="Index">Vuelos</a>
+            @if (rol is not null)
+            {
+                <a asp-controller="Reservas" asp-action="Index">Reservas</a>
+                <a asp-controller="Pasajeros" asp-action="Index">Pasajeros</a>
+            }
+            @if (rol == Roles.Admin)
+            {
+                <a asp-controller="Vuelos" asp-action="Crear">Nuevo vuelo</a>
+            }
+        </nav>
+        @* La vista también puede leer la sesión: Context es el HttpContext del request *@
+        <div class="usuario">
+            @if (rol is not null)
+            {
+                <span>@Context.Session.GetString(AutenticacionService.ClaveNombre) <small>(@rol)</small></span>
+                <form asp-controller="Login" asp-action="Salir" method="post">
+                    <button type="submit" class="enlace">Salir</button>
+                </form>
+            }
+            else
+            {
+                <a asp-controller="Login" asp-action="Index">Ingresar</a>
+            }
+        </div>
+    </header>
+
+    @if (datosFalsos)
+    {
+        <div class="aviso-falso">Datos de prueba en memoria (OrigenDeDatos = Falso): al reiniciar la app se pierden los cambios.</div>
+    }
+
+    <main>
+        @* Mensajes que vienen de un Redirect (TempData sobrevive exactamente un request más) *@
+        @if (TempData["Mensaje"] is string mensaje)
+        {
+            <p class="mensaje ok">@mensaje</p>
+        }
+        @if (TempData["Error"] is string error)
+        {
+            <p class="mensaje error">@error</p>
+        }
+
+        @* Acá se dibuja la vista que eligió el controlador *@
+        @RenderBody()
+    </main>
+
+    <footer>
+        AeroTaller · TP integrador de Taller de Lenguajes 2 · FACET · @DateTime.Now.Year
+    </footer>
+
+    @* Scripts propios de cada vista; si una vista no los define, no pasa nada *@
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

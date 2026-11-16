@@ -1,0 +1,50 @@
+@model VueloCrearViewModel
+@{
+    ViewData["Title"] = "Nuevo vuelo";
+}
+
+<h1>Nuevo vuelo</h1>
+
+<form asp-action="Crear" method="post" class="formulario">
+    <div asp-validation-summary="ModelOnly"></div>
+
+    <label asp-for="Numero"></label>
+    <input asp-for="Numero" placeholder="AT1234" />
+    <span asp-validation-for="Numero"></span>
+
+    <label asp-for="OrigenId"></label>
+    <select asp-for="OrigenId" asp-items="Model.Aeropuertos">
+        <option value="">— Elegir —</option>
+    </select>
+    <span asp-validation-for="OrigenId"></span>
+
+    <label asp-for="DestinoId"></label>
+    <select asp-for="DestinoId" asp-items="Model.Aeropuertos">
+        <option value="">— Elegir —</option>
+    </select>
+    <span asp-validation-for="DestinoId"></span>
+
+    <label asp-for="Salida"></label>
+    <input asp-for="Salida" />
+    <span asp-validation-for="Salida"></span>
+
+    <label asp-for="DuracionMinutos"></label>
+    <input asp-for="DuracionMinutos" />
+    <span asp-validation-for="DuracionMinutos"></span>
+
+    <label asp-for="Filas"></label>
+    <input asp-for="Filas" />
+    <span asp-validation-for="Filas"></span>
+
+    <label asp-for="Precio"></label>
+    <input asp-for="Precio" />
+    <span asp-validation-for="Precio"></span>
+
+    <button type="submit">Crear vuelo</button>
+</form>
+
+<p><a asp-action="Index">← Volver a los vuelos</a></p>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

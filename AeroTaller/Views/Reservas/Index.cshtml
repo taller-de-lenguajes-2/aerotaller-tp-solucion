@@ -1,0 +1,39 @@
+@model ReservaIndexViewModel
+@{
+    ViewData["Title"] = "Reservas";
+}
+
+<h1>Reservas</h1>
+
+<p class="filtros">
+    Ver:
+    <a asp-action="Index" class="@(Model.Estado is null ? "activo" : "")">Todas</a>
+    <a asp-action="Index" asp-route-estado="Confirmada" class="@(Model.Estado == EstadoReserva.Confirmada ? "activo" : "")">Confirmadas</a>
+    <a asp-action="Index" asp-route-estado="Cancelada" class="@(Model.Estado == EstadoReserva.Cancelada ? "activo" : "")">Canceladas</a>
+    <a class="boton secundario" asp-action="Crear">+ Nueva reserva</a>
+</p>
+
+<table>
+    <thead>
+        <tr><th>#</th><th>Vuelo</th><th>Ruta</th><th>Salida</th><th>Pasajero</th><th>Asiento</th><th>Estado</th></tr>
+    </thead>
+    <tbody>
+        @foreach (ReservaListadoViewModel reserva in Model.Reservas)
+        {
+            <tr class="@(reserva.Cancelada ? "pasado" : "")">
+                <td><a asp-action="Detalle" asp-route-id="@reserva.Id">@reserva.Id</a></td>
+                <td><a asp-controller="Vuelos" asp-action="Detalle" asp-route-id="@reserva.VueloId">@reserva.Vuelo</a></td>
+                <td>@reserva.Ruta</td>
+                <td>@reserva.Salida</td>
+                <td><a asp-controller="Pasajeros" asp-action="Detalle" asp-route-id="@reserva.PasajeroId">@reserva.Pasajero</a></td>
+                <td>@reserva.Asiento</td>
+                <td>@reserva.Estado</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@if (Model.Reservas.Count == 0)
+{
+    <p>No hay reservas para mostrar.</p>
+}
