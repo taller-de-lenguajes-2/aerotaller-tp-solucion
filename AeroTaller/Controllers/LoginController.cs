@@ -18,12 +18,12 @@ public class LoginController(IAutenticacionService autenticacion) : Controller
 
         if (!autenticacion.Login(modelo.NombreUsuario, modelo.Clave))
         {
-            // No decir cuál de los dos está mal: no le damos pistas a quien prueba usuarios
+            // No indicar cuál de los dos es incorrecto: no se dan pistas a quien prueba usuarios
             ModelState.AddModelError("", "Usuario o contraseña incorrectos.");
             return View(modelo);
         }
 
-        // Solo se vuelve a una dirección de NUESTRO sitio (evita redirecciones a otro sitio)
+        // Solo se vuelve a una dirección del PROPIO sitio (evita redirecciones a otro sitio)
         if (Url.IsLocalUrl(modelo.ReturnUrl)) return Redirect(modelo.ReturnUrl);
         return RedirectToAction("Index", "Home");
     }

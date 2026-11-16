@@ -10,7 +10,7 @@ public class FechaFuturaAttribute : ValidationAttribute
 
     public override bool IsValid(object? value)
     {
-        // null lo resuelve [Required]: acá solo se mira la fecha si hay una
+        // null lo resuelve [Required]: aquí solo se evalúa la fecha si hay una
         return value is not DateTime fecha || fecha > DateTime.Now;
     }
 }

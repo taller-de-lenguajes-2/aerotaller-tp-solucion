@@ -53,7 +53,7 @@ public class VuelosController(
         {
             try
             {
-                // Pasó [Required]: acá los int? ya tienen valor
+                // Pasó [Required]: en este punto los int? ya tienen valor
                 int id = vueloService.Crear(modelo.Numero, modelo.OrigenId!.Value, modelo.DestinoId!.Value,
                     modelo.Salida!.Value, modelo.DuracionMinutos!.Value, modelo.Filas!.Value, modelo.Precio!.Value);
 

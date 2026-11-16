@@ -1,6 +1,6 @@
 using Microsoft.Data.Sqlite;
 
-// En el tema 15 los usuarios estaban en una lista en memoria; acá están en la tabla Usuario (desafío 9).
+// En el tema 15 los usuarios estaban en una lista en memoria; aquí están en la tabla Usuario (desafío 9).
 public class UsuarioRepository(ConexionDb conexionDb) : IUsuarioRepository
 {
     private readonly string cadenaConexion = conexionDb.Cadena;

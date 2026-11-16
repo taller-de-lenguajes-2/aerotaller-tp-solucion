@@ -1,6 +1,6 @@
 using Microsoft.Data.Sqlite;
 
-// Todo el SQL de la tabla Aeropuerto vive acá (desafío 2).
+// Todo el SQL de la tabla Aeropuerto vive aquí (desafío 2).
 public class AeropuertoRepository(ConexionDb conexionDb) : IAeropuertoRepository
 {
     private readonly string cadenaConexion = conexionDb.Cadena;

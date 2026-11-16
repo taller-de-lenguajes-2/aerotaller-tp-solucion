@@ -1,6 +1,6 @@
-# AeroTaller — solución de referencia (uso interno de la cátedra)
+# AeroTaller — solución de referencia
 
-🔒 Repo **privado**. La plantilla que reciben los alumnos está en
+Solución de referencia y documentación de diseño del TP. La plantilla que reciben los alumnos está en
 [taller-de-lenguajes-2/aerotaller-tp](https://github.com/taller-de-lenguajes-2/aerotaller-tp).
 
 | Carpeta | Qué es |
@@ -9,7 +9,7 @@
 | [`docs/PROPUESTA.md`](./docs/PROPUESTA.md) | diseño del TP: decisiones, formato de cada desafío, desafíos, insignias |
 | [`docs/MAPA_DE_TEMAS.md`](./docs/MAPA_DE_TEMAS.md) | relación con las diapositivas (temas 00–17) y lo que el TP agrega |
 
-## Correr la solución
+## Ejecución de la solución
 
 ```bash
 cd AeroTaller
@@ -17,7 +17,7 @@ dotnet run                               # http://localhost:5210 · admin/aero20
 dotnet run --launch-profile datos-falsos # mismos controladores y servicios, repositorios en memoria
 ```
 
-## Validarla con el verificador de la plantilla
+## Validación con el verificador de la plantilla
 
 Con los dos repos clonados uno al lado del otro:
 
@@ -28,7 +28,7 @@ dotnet run --project verificador -- todos --sin-git --proyecto ../aerotaller-tp-
 
 Resultado esperado: **11/11 desafíos en verde**.
 
-## Corregir a un alumno
+## Corrección de una entrega
 
 La corrección automática de Classroom corre el verificador que está **en el repo del alumno**. Para descartar que lo haya
 modificado, correr el verificador **oficial** (el de la plantilla) contra su proyecto:
@@ -44,5 +44,5 @@ Y mirar el historial de commits del alumno (`git log --stat`): un commit por des
 ## Configurar la tarea en GitHub Classroom
 
 1. Nueva tarea → *Template repository*: `taller-de-lenguajes-2/aerotaller-tp`.
-2. La corrección automática ya viene en `.github/workflows/classroom.yml` (11 tests, 100 puntos). No hace falta cargar tests a mano.
+2. La corrección automática ya viene en `.github/workflows/classroom.yml` (10 tests de los desafíos 0 a 9, 100 puntos; el simulacro no suma puntos). No hace falta cargar tests a mano.
 3. Visibilidad de los repos de alumnos: privada.

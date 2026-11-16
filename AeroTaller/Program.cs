@@ -3,7 +3,7 @@ using Microsoft.Data.Sqlite;
 using Serilog;
 
 // Fechas y moneda en castellano, en cualquier máquina.
-// Ojo con los decimales: un <input type="number"> SIEMPRE manda "18.5" (con punto), y con es-AR puro
+// Decimales: un <input type="number"> SIEMPRE envía "18.5" (con punto), y con es-AR sin modificar
 // el model binding lo leería como 185. Por eso los números (no la moneda) usan punto decimal.
 var cultura = (CultureInfo)CultureInfo.GetCultureInfo("es-AR").Clone();
 cultura.NumberFormat.NumberDecimalSeparator = ".";
@@ -17,7 +17,7 @@ builder.Services.AddSerilog(config => config.ReadFrom.Configuration(builder.Conf
 
 // ── Datos (desafío 7): qué implementación se usa para cada interfaz ──
 // "OrigenDeDatos" sale de appsettings.json, o de la línea de comandos: dotnet run --OrigenDeDatos=Falso
-// Fijate que SOLO cambia este bloque: controladores, servicios y vistas no se enteran.
+// Solo cambia este bloque: controladores, servicios y vistas no se modifican.
 string origenDeDatos = builder.Configuration["OrigenDeDatos"] ?? "Sqlite";
 
 if (origenDeDatos == "Falso")
@@ -74,7 +74,7 @@ var app = builder.Build();
 
 // ── El pipeline: el orden importa ──
 app.UseSerilogRequestLogging();           // una línea de log por request (antes del manejador de errores)
-app.UseExceptionHandler("/Home/Error");   // si algo explota: se loguea y se muestra Views/Home/Error.cshtml
+app.UseExceptionHandler("/Home/Error");   // si algo falla: se registra en el log y se muestra Views/Home/Error.cshtml
 app.UseStatusCodePagesWithReExecute("/Home/NoEncontrado", "?codigo={0}");   // 404 con la misma estética
 app.UseStaticFiles();                     // sirve lo que está en wwwroot (el CSS)
 app.UseSession();                         // antes de los controladores: así las acciones pueden usar la sesión

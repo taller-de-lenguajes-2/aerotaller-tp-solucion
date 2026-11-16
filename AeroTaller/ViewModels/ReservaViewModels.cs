@@ -25,17 +25,17 @@ public class ReservaIndexViewModel
 
 public class ReservaCrearViewModel
 {
-    // int? para que "no eligió nada" llegue como null y lo agarre [Required]
+    // int? para que "sin selección" llegue como null y lo detecte [Required]
     [Display(Name = "Vuelo")]
-    [Required(ErrorMessage = "Elegí un vuelo.")]
+    [Required(ErrorMessage = "El vuelo es obligatorio.")]
     public int? VueloId { get; set; }
 
     [Display(Name = "Pasajero")]
-    [Required(ErrorMessage = "Elegí un pasajero.")]
+    [Required(ErrorMessage = "El pasajero es obligatorio.")]
     public int? PasajeroId { get; set; }
 
     [Display(Name = "Asiento")]
-    [Required(ErrorMessage = "Indicá el asiento.")]
+    [Required(ErrorMessage = "El asiento es obligatorio.")]
     [RegularExpression(@"^\s*\d{1,2}[A-Fa-f]\s*$", ErrorMessage = "El asiento es la fila y una letra de la A a la F (ej.: 12C).")]
     public string Asiento { get; set; } = "";
 
@@ -57,11 +57,11 @@ public class EquipajeCrearViewModel
     public int ReservaId { get; set; }
 
     [Display(Name = "Tipo")]
-    [Required(ErrorMessage = "Elegí el tipo.")]
+    [Required(ErrorMessage = "El tipo es obligatorio.")]
     public TipoEquipaje? Tipo { get; set; }
 
     [Display(Name = "Peso (kg)")]
-    [Required(ErrorMessage = "Indicá el peso.")]
+    [Required(ErrorMessage = "El peso es obligatorio.")]
     [Range(0.1, 50, ErrorMessage = "El peso va de {1} a {2} kg.")]
     public decimal? PesoKg { get; set; }
 

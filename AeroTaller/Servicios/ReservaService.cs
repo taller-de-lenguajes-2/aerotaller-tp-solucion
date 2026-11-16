@@ -59,7 +59,7 @@ public class ReservaService(
             // Dos personas eligieron el mismo asiento al mismo tiempo: las dos pasaron la regla 4,
             // pero el índice único de la base solo deja entrar a la primera.
             logger.LogWarning("Choque de reservas: el asiento {Asiento} del vuelo {Numero} se ocupó recién", asiento, vuelo.Numero);
-            throw new ReglaDeNegocioException("Asiento", $"Alguien acaba de reservar el {asiento}. Elegí otro asiento.", ex);
+            throw new ReglaDeNegocioException("Asiento", $"El asiento {asiento} acaba de reservarse en otra operación. Debe elegirse otro asiento.", ex);
         }
 
         // Log estructurado: {ReservaId} es un dato con nombre, no texto pegado con $"..."

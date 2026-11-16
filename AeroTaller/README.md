@@ -1,9 +1,9 @@
 # AeroTaller — solución de referencia
 
 La aerolínea del TP integrador, terminada: lo que queda al final de los desafíos 0 a 9 más el simulacro (equipaje).
-**No la mires antes de intentar cada desafío**: la idea es que la uses para comparar, no para copiar.
+Es material de referencia para la cátedra: sirve para comparar resoluciones, no para distribuir a los alumnos.
 
-## Cómo correrla
+## Ejecución
 
 ```bash
 cd AeroTaller
@@ -11,7 +11,7 @@ dotnet run
 ```
 
 Se abre en `http://localhost:5210`. La primera vez crea `aerotaller.db` con `aerotaller.sql`
-(si querés empezar de cero, borrá `aerotaller.db` con la app apagada).
+(para empezar de cero, borrar `aerotaller.db` con la aplicación detenida).
 
 **Usuarios de prueba** (en la tabla `Usuario`, en texto plano solo para el TP):
 
@@ -30,8 +30,8 @@ dotnet run --launch-profile datos-falsos
 dotnet run -- --OrigenDeDatos=Falso
 ```
 
-Arriba aparece un aviso amarillo: todo está en memoria (`Repositorios/Falsos/`). Mirá `Program.cs`: lo único que cambia
-es el bloque de registros del contenedor. Controladores, servicios y vistas son exactamente los mismos.
+En la parte superior aparece un aviso amarillo: los datos están en memoria (`Repositorios/Falsos/`). En `Program.cs` lo
+único que cambia es el bloque de registros del contenedor; controladores, servicios y vistas son exactamente los mismos.
 
 ## Mapa del código
 
@@ -51,13 +51,14 @@ es el bloque de registros del contenedor. Controladores, servicios y vistas son 
 | `Filtros/` | `[RequiereLogin]`, `[RequiereRol]` | 9 |
 | `logs/` | se crea al correr: un archivo por día | 8 |
 
-## Cosas para probar con el depurador
+## Pruebas con el depurador
 
-- **Choque de reservas**: poné un breakpoint en `reservas.Insertar(reserva)` de `ReservaService.Reservar` y otro en el
-  `catch (SqliteException ex) when …`. Reservá un asiento libre; cuando frene, desde DB Browser insertá (y escribí los cambios)
-  una reserva confirmada para ese mismo vuelo y asiento —"el otro mostrador"—. Seguí con F5: el índice único rechaza el
-  INSERT y caés en el `catch`. (El verificador del desafío 8 prueba lo mismo con 8 reservas simultáneas.)
-- **La página de error**: corré con la base en solo lectura y probá reservar:
+- **Choque de reservas**: colocar un punto de interrupción en `reservas.Insertar(reserva)` de `ReservaService.Reservar` y
+  otro en el `catch (SqliteException ex) when …`. Reservar un asiento libre; con la ejecución detenida, insertar desde
+  DB Browser (y escribir los cambios) una reserva confirmada para el mismo vuelo y asiento. Al continuar con F5, el índice
+  único rechaza el INSERT y la ejecución entra en el `catch`. (El verificador del desafío 8 prueba lo mismo con 8 reservas
+  simultáneas.)
+- **Página de error**: ejecutar con la base en solo lectura e intentar una reserva:
   `dotnet run -- "--ConnectionStrings:AeroTaller=Data Source=aerotaller.db;Mode=ReadOnly"`.
-  Buscá el código que muestra la página en `logs/`.
-- **El filtro de login**: breakpoint en `RequiereLoginAttribute.OnActionExecuting` y entrá a `/Reservas` sin sesión.
+  El código que muestra la página se encuentra en `logs/`.
+- **Filtro de login**: punto de interrupción en `RequiereLoginAttribute.OnActionExecuting` y acceso a `/Reservas` sin sesión.

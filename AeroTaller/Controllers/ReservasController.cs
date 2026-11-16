@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-// El controlador queda "flaco" (desafío 6): recibe el formulario, llama al servicio y elige la vista.
-// Las reglas (asiento libre, vuelo lleno…) NO están acá: están en ReservaService.
+// El controlador queda "delgado" (desafío 6): recibe el formulario, llama al servicio y elige la vista.
+// Las reglas (asiento libre, vuelo lleno…) NO están aquí: están en ReservaService.
 [RequiereLogin]
 public class ReservasController(
     IReservaRepository reservas,

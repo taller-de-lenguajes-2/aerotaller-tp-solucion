@@ -10,14 +10,14 @@ public class HomeController(IVueloRepository vuelos) : Controller
         return View(ocupacion);
     }
 
-    // A esta acción llega UseExceptionHandler("/Home/Error") cuando algo explota (desafío 8).
-    // El error ya quedó en el log; acá solo se muestra un mensaje digno y el Id para buscarlo.
+    // A esta acción llega UseExceptionHandler("/Home/Error") cuando algo falla (desafío 8).
+    // El error ya quedó en el log; aquí solo se muestra un mensaje adecuado y el Id para buscarlo.
     public IActionResult Error()
     {
         return View(new ErrorViewModel(Activity.Current?.Id ?? HttpContext.TraceIdentifier));
     }
 
-    // UseStatusCodePagesWithReExecute manda acá los 404 (por ejemplo /Vuelos/Detalle/999)
+    // UseStatusCodePagesWithReExecute envía aquí los 404 (por ejemplo /Vuelos/Detalle/999)
     public IActionResult NoEncontrado(int codigo)
     {
         Response.StatusCode = codigo;

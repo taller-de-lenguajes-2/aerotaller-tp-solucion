@@ -90,11 +90,11 @@ public class VueloCrearViewModel
     public string Numero { get; set; } = "";
 
     [Display(Name = "Origen")]
-    [Required(ErrorMessage = "Elegí el origen.")]
+    [Required(ErrorMessage = "El origen es obligatorio.")]
     public int? OrigenId { get; set; }
 
     [Display(Name = "Destino")]
-    [Required(ErrorMessage = "Elegí el destino.")]
+    [Required(ErrorMessage = "El destino es obligatorio.")]
     public int? DestinoId { get; set; }
 
     [Display(Name = "Salida")]
@@ -108,7 +108,7 @@ public class VueloCrearViewModel
     public int? DuracionMinutos { get; set; }
 
     [Display(Name = "Filas de asientos")]
-    [Required(ErrorMessage = "Indicá cuántas filas tiene el avión.")]
+    [Required(ErrorMessage = "La cantidad de filas es obligatoria.")]
     [Range(1, 40, ErrorMessage = "El avión tiene entre {1} y {2} filas.")]
     public int? Filas { get; set; }
 

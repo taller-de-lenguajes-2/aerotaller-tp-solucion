@@ -3,6 +3,6 @@
     ViewData["Title"] = "No encontrado";
 }
 
-<h1>@(Model == 404 ? "No encontramos eso" : $"Error {Model}")</h1>
-<p>La página o el dato que buscás no existe (o ya no existe).</p>
+<h1>@(Model == 404 ? "Recurso no encontrado" : $"Error {Model}")</h1>
+<p>La página o el dato solicitado no existe.</p>
 <p><a asp-controller="Home" asp-action="Index">← Volver al inicio</a></p>

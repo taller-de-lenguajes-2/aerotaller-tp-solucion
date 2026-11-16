@@ -3,11 +3,11 @@ using System.ComponentModel.DataAnnotations;
 public class LoginViewModel
 {
     [Display(Name = "Usuario")]
-    [Required(ErrorMessage = "Ingresá tu usuario.")]
+    [Required(ErrorMessage = "El usuario es obligatorio.")]
     public string NombreUsuario { get; set; } = "";
 
     [Display(Name = "Contraseña")]
-    [Required(ErrorMessage = "Ingresá tu contraseña.")]
+    [Required(ErrorMessage = "La contraseña es obligatoria.")]
     [DataType(DataType.Password)]                       // asp-for genera type="password"
     public string Clave { get; set; } = "";
 

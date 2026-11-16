@@ -42,12 +42,12 @@ Cada 3 desafíos, un checkpoint **"¿Cómo vamos?"**: resumen automático (hecho
 | 8 | Excepciones y logs | 16 · 17 | índice único + `catch when`, Serilog, página de error |
 | CP3 | ¿Cómo vamos? | | |
 | 9 | Autenticación | 15 | login, sesión, `[RequiereLogin]`, `[RequiereRol]` |
-| 10 | Simulacro (120 min) | todos | equipaje de punta a punta, sin guía |
+| 10 | Simulacro (2 h 30 min) | todos | equipaje de punta a punta, sin guía; se mide por porcentaje de completitud |
 
 ## Insignias (primera versión, editable en `insignias.json`)
 
 Una por escala + logros: primera vez / piloto de pruebas (quiz al primer intento), ojo de halcón / cazabugs
 (preguntas del depurador), bitácora al día (3 checkpoints), lector de manuales / biblioteca de a bordo (lecturas),
 commit a tiempo / push perfecto (repo al día al verificar), certificado por la torre (verificador en verde),
-pregunta sin miedo (anotar una duda), nunca me rendí (aprobar tras 3+ intentos), a horario (simulacro en tiempo),
+consulta registrada (anotar una duda), perseverancia (aprobar tras 3+ intentos), a horario (simulacro en tiempo),
 comandante (todo completo).
