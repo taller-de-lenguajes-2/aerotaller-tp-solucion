@@ -14,7 +14,7 @@
     <input asp-for="ReservaId" type="hidden" />
 
     <label asp-for="Tipo"></label>
-    @* Html.GetEnumSelectList arma las opciones a partir del enum TipoEquipaje *@
+    @* Html.GetEnumSelectList genera las opciones a partir del enum TipoEquipaje *@
     <select asp-for="Tipo" asp-items="Html.GetEnumSelectList<TipoEquipaje>()">
         <option value="">— Elegir —</option>
     </select>

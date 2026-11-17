@@ -1,9 +1,9 @@
 // Implementaciones "falsas" de las mismas interfaces (desafío 7): sin SQL, sin archivo .db.
-// Los servicios y los controladores NO se enteran del cambio: dependen de la interfaz.
+// Los servicios y los controladores NO se modifican: dependen de la interfaz.
 // Se activan con "OrigenDeDatos": "Falso" en appsettings.json (o: dotnet run --OrigenDeDatos=Falso).
 //
 // Para qué sirven:
-//   · probar la app sin base (o con la base rota),
+//   · probar la app sin base (o con la base dañada),
 //   · mostrar que cambiar de implementación es cambiar el REGISTRO en Program.cs, no el resto del código.
 
 public class AeropuertoRepositoryFalso(BaseFalsa db) : IAeropuertoRepository

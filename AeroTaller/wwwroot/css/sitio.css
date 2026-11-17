@@ -1,4 +1,4 @@
-/* Misma base que la clínica de la cátedra, con un par de piezas propias (mapa de asientos, barras) */
+/* Misma base que la clínica de la cátedra, con algunos estilos propios (mapa de asientos, barras) */
 body { margin: 0; font-family: system-ui, "Segoe UI", sans-serif; color: #1b2230; background: #f6f7f9; }
 header { display: flex; gap: 2rem; align-items: center; padding: 0.9rem 2rem; background: #12355b; flex-wrap: wrap; }
 header a { color: #fff; text-decoration: none; }

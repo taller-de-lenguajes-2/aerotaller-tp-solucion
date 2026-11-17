@@ -26,7 +26,7 @@ cd aerotaller-tp
 dotnet run --project verificador -- todos --sin-git --proyecto ../aerotaller-tp-solucion/AeroTaller
 ```
 
-Resultado esperado: **11/11 desafíos en verde**.
+Resultado esperado: **11/11 desafíos aprobados**.
 
 ## Corrección de una entrega
 

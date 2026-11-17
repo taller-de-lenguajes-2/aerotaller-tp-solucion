@@ -10,7 +10,7 @@ public class HomeController(IVueloRepository vuelos) : Controller
         return View(ocupacion);
     }
 
-    // A esta acción llega UseExceptionHandler("/Home/Error") cuando algo falla (desafío 8).
+    // UseExceptionHandler("/Home/Error") re-ejecuta el request contra esta acción cuando ocurre un error (desafío 8).
     // El error ya quedó en el log; aquí solo se muestra un mensaje adecuado y el Id para buscarlo.
     public IActionResult Error()
     {

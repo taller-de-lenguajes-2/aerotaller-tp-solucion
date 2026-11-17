@@ -46,8 +46,8 @@ public class EquipajeRepository(ConexionDb conexionDb) : IEquipajeRepository
         return Convert.ToInt32(comando.ExecuteScalar());
     }
 
-    // SUM con JOIN: los kilos que van en la bodega de un vuelo (solo reservas confirmadas).
-    // COALESCE: si no hay equipaje, SUM devuelve NULL; así devuelve 0.
+    // SUM con JOIN: los kilos despachados en la bodega de un vuelo (solo reservas confirmadas).
+    // COALESCE: si no hay equipaje, SUM devuelve NULL; con COALESCE el resultado es 0.
     public decimal PesoEnBodega(int vueloId)
     {
         using var conexion = new SqliteConnection(cadenaConexion);

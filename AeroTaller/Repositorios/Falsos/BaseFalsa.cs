@@ -1,7 +1,7 @@
 // Una "base de datos" en memoria para los repositorios falsos (desafío 7).
-// Se registra como Singleton: las listas viven mientras corre la app (al reiniciar, vuelven a estos datos).
+// Se registra como Singleton: las listas se conservan mientras la aplicación está en ejecución (al reiniciarla, vuelven a estos datos).
 // Todos los repositorios falsos reciben ESTA misma instancia por el constructor,
-// así una reserva creada con ReservaRepositoryFalso se ve en VueloRepositoryFalso.
+// de modo que una reserva creada con ReservaRepositoryFalso resulta visible desde VueloRepositoryFalso.
 public class BaseFalsa
 {
     public List<Aeropuerto> Aeropuertos { get; }
@@ -11,7 +11,7 @@ public class BaseFalsa
     public List<Usuario> Usuarios { get; }
     public List<Equipaje> Equipajes { get; } = [];
 
-    // Las listas no son seguras para varios requests a la vez: todos los repos falsos usan este candado
+    // Las listas no son seguras para varios requests a la vez: todos los repositorios falsos usan este candado
     public object Candado { get; } = new();
 
     public BaseFalsa()

@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-// Vuelos: cualquiera puede verlos; solo el Admin los crea.
-// El controlador recibe lo que necesita por el constructor (desafío 7): nunca hace "new" de un repositorio.
+// Vuelos: el listado y el detalle son públicos; solo el Admin los crea.
+// El controlador recibe sus dependencias por el constructor (desafío 7): nunca instancia un repositorio con "new".
 public class VuelosController(
     IVueloRepository vuelos,
     IAeropuertoRepository aeropuertos,
@@ -11,7 +11,7 @@ public class VuelosController(
     IVueloService vueloService) : Controller
 {
     // GET /Vuelos?DestinoId=2&Desde=2026-12-01
-    // Los parámetros del query string llegan solos al ViewModel (model binding)
+    // Los parámetros del query string se asignan automáticamente al ViewModel (model binding)
     public IActionResult Index(VueloIndexViewModel filtro)
     {
         List<Vuelo> encontrados = vuelos.Buscar(filtro.DestinoId, filtro.Desde);
@@ -53,7 +53,7 @@ public class VuelosController(
         {
             try
             {
-                // Pasó [Required]: en este punto los int? ya tienen valor
+                // Superada la validación de [Required]: en este punto los int? ya tienen valor
                 int id = vueloService.Crear(modelo.Numero, modelo.OrigenId!.Value, modelo.DestinoId!.Value,
                     modelo.Salida!.Value, modelo.DuracionMinutos!.Value, modelo.Filas!.Value, modelo.Precio!.Value);
 
@@ -66,7 +66,7 @@ public class VuelosController(
             }
         }
 
-        // Algo falló: las listas no vuelven en el POST, hay que cargarlas otra vez
+        // Algo falló: las listas no vuelven en el POST y deben cargarse nuevamente
         modelo.Aeropuertos = ListaDeAeropuertos();
         return View(modelo);
     }

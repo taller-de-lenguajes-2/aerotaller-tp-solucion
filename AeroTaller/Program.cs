@@ -2,7 +2,7 @@ using System.Globalization;
 using Microsoft.Data.Sqlite;
 using Serilog;
 
-// Fechas y moneda en castellano, en cualquier máquina.
+// Fechas y moneda en castellano, en cualquier computadora.
 // Decimales: un <input type="number"> SIEMPRE envía "18.5" (con punto), y con es-AR sin modificar
 // el model binding lo leería como 185. Por eso los números (no la moneda) usan punto decimal.
 var cultura = (CultureInfo)CultureInfo.GetCultureInfo("es-AR").Clone();
@@ -33,7 +33,7 @@ if (origenDeDatos == "Falso")
 }
 else
 {
-    // La cadena se lee UNA vez, al arrancar. Si falta, la app no levanta (mejor que un error raro después)
+    // La cadena se lee UNA vez, al arrancar. Si falta, la app no se inicia (es preferible a un error confuso más adelante)
     string cadenaConexion = builder.Configuration.GetConnectionString("AeroTaller")
         ?? throw new InvalidOperationException("Falta la cadena de conexión 'AeroTaller' en appsettings.json");
     CrearBaseSiNoExiste(cadenaConexion);
@@ -41,7 +41,7 @@ else
     // La cadena, envuelta en un tipo propio: un solo objeto para toda la aplicación
     builder.Services.AddSingleton(new ConexionDb(cadenaConexion));
 
-    // Repositorios: uno nuevo por request. Reciben ConexionDb, que también está en el contenedor
+    // Repositorios: uno nuevo por request. Requieren ConexionDb, que también está registrada en el contenedor
     builder.Services.AddScoped<IAeropuertoRepository, AeropuertoRepository>();
     builder.Services.AddScoped<IVueloRepository, VueloRepository>();
     builder.Services.AddScoped<IPasajeroRepository, PasajeroRepository>();
@@ -60,11 +60,11 @@ builder.Services.AddScoped<IEquipajeService, EquipajeService>();
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>
 {
-    options.IdleTimeout = TimeSpan.FromMinutes(20);   // sin actividad por 20 minutos, la sesión se pierde
+    options.IdleTimeout = TimeSpan.FromMinutes(20);   // sin actividad por 20 minutos, la sesión expira
     options.Cookie.HttpOnly = true;                   // JavaScript no puede leer la cookie de sesión
     options.Cookie.IsEssential = true;
 });
-builder.Services.AddHttpContextAccessor();            // para que AutenticacionService llegue a la sesión
+builder.Services.AddHttpContextAccessor();            // para que AutenticacionService acceda a la sesión
 builder.Services.AddScoped<IAutenticacionService, AutenticacionService>();
 
 // MVC: controladores que devuelven vistas
@@ -87,7 +87,7 @@ app.MapControllerRoute(
 app.Logger.LogInformation("AeroTaller arrancó con datos de origen {OrigenDeDatos}", origenDeDatos);
 app.Run();
 
-// Si aerotaller.db no existe la arma con aerotaller.sql (desafío 1).
+// Si aerotaller.db no existe, se crea con aerotaller.sql (desafío 1).
 static void CrearBaseSiNoExiste(string cadenaConexion)
 {
     var archivo = new SqliteConnectionStringBuilder(cadenaConexion).DataSource;

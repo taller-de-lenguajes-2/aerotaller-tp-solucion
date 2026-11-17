@@ -1,5 +1,5 @@
 // Las abstracciones de las que dependen los servicios y los controladores (desafío 7).
-// Dicen QUÉ se puede hacer con los datos; las clases que las implementan dicen CÓMO
+// Definen QUÉ se puede hacer con los datos; las clases que las implementan definen CÓMO
 // (con SQLite en Repositorios/, en memoria en Repositorios/Falsos/).
 
 public interface IAeropuertoRepository

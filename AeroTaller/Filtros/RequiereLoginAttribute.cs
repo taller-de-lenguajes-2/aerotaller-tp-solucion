@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
-// Un filtro: corre ANTES de la acción (desafío 9, igual que en el tema 15).
-// Si no hay sesión iniciada, no deja pasar y manda al login, recordando a dónde quería ir.
-// Se pone sobre un controlador (todas sus acciones) o sobre una acción.
+// Un filtro: se ejecuta ANTES de la acción (desafío 9, igual que en el tema 15).
+// Si no hay sesión iniciada, interrumpe el request y redirige al login, conservando la dirección solicitada.
+// Se aplica sobre un controlador (todas sus acciones) o sobre una acción.
 public class RequiereLoginAttribute : ActionFilterAttribute
 {
     public override void OnActionExecuting(ActionExecutingContext context)
@@ -18,7 +18,7 @@ public class RequiereLoginAttribute : ActionFilterAttribute
     }
 }
 
-// Autorización: además de haber iniciado sesión, hace falta uno de estos roles.
+// Autorización: además de haber iniciado sesión, se requiere uno de estos roles.
 // Uso: [RequiereRol(Roles.Admin)]  o  [RequiereRol(Roles.Admin, Roles.Mostrador)]
 public class RequiereRolAttribute(params string[] roles) : ActionFilterAttribute
 {

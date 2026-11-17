@@ -5,7 +5,7 @@
 
 <h1>Vuelos</h1>
 
-@* method="get": el filtro viaja en el query string (/Vuelos?DestinoId=2&Desde=...) y se puede compartir el link *@
+@* method="get": el filtro viaja en el query string (/Vuelos?DestinoId=2&Desde=...) y el enlace puede compartirse *@
 <form asp-action="Index" method="get" class="buscador">
     <label asp-for="DestinoId"></label>
     <select asp-for="DestinoId" asp-items="Model.Destinos">

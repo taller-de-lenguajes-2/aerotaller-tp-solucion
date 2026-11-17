@@ -11,9 +11,9 @@ public class LoginViewModel
     [DataType(DataType.Password)]                       // asp-for genera type="password"
     public string Clave { get; set; } = "";
 
-    // A dónde volver después de iniciar sesión
+    // Dirección a la que se vuelve después de iniciar sesión
     public string? ReturnUrl { get; set; }
 }
 
-// La pantalla de error: solo el Id para buscar el request en el log (nunca el detalle técnico)
+// La pantalla de error solo recibe el Id para buscar el request en el log (nunca el detalle técnico)
 public record ErrorViewModel(string? RequestId);

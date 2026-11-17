@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 // Un atributo de validación propio (desafío 5, igual que en el tema 13).
 // Se escribe una vez y se usa en cualquier propiedad DateTime.
-// Este corre solo en el servidor (no tiene versión en JavaScript).
+// Este se ejecuta solo en el servidor (no tiene versión en JavaScript).
 public class FechaFuturaAttribute : ValidationAttribute
 {
     public FechaFuturaAttribute()
@@ -10,7 +10,7 @@ public class FechaFuturaAttribute : ValidationAttribute
 
     public override bool IsValid(object? value)
     {
-        // null lo resuelve [Required]: aquí solo se evalúa la fecha si hay una
+        // El caso null lo resuelve [Required]: aquí solo se evalúa la fecha si existe
         return value is not DateTime fecha || fecha > DateTime.Now;
     }
 }

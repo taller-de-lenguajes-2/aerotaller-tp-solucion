@@ -1,4 +1,4 @@
-@* @inject: una vista también puede pedirle cosas al contenedor (desafío 7) *@
+@* @inject: una vista también puede solicitar servicios al contenedor (desafío 7) *@
 @inject IConfiguration Configuracion
 @{
     string? rol = Context.Session.GetString(AutenticacionService.ClaveRol);
@@ -9,13 +9,13 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    @* Cada vista pone su título en ViewData["Title"] *@
+    @* Cada vista define su título en ViewData["Title"] *@
     <title>@ViewData["Title"] · AeroTaller</title>
     <link rel="stylesheet" href="~/css/sitio.css" asp-append-version="true" />
 </head>
 <body>
     <header>
-        <a class="marca" asp-controller="Home" asp-action="Index">✈ AeroTaller</a>
+        <a class="marca" asp-controller="Home" asp-action="Index">AeroTaller</a>
         <nav>
             <a asp-controller="Vuelos" asp-action="Index">Vuelos</a>
             @if (rol is not null)
@@ -60,7 +60,7 @@
             <p class="mensaje error">@error</p>
         }
 
-        @* Aquí se dibuja la vista que eligió el controlador *@
+        @* Aquí se dibuja la vista que seleccionó el controlador *@
         @RenderBody()
     </main>
 
@@ -68,7 +68,7 @@
         AeroTaller · TP integrador de Taller de Lenguajes 2 · FACET · @DateTime.Now.Year
     </footer>
 
-    @* Scripts propios de cada vista; si una vista no los define, no pasa nada *@
+    @* Scripts propios de cada vista; si una vista no los define, la sección se omite sin error *@
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

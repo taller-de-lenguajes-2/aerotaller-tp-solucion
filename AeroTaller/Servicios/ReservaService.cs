@@ -1,7 +1,7 @@
 using Microsoft.Data.Sqlite;
 
 // Las reglas para reservar y cancelar (desafíos 6 y 8).
-// Recibe tres repositorios y un logger: el contenedor los crea y se los pasa (desafío 7).
+// Recibe tres repositorios y un logger: el contenedor los crea y los inyecta por el constructor (desafío 7).
 public class ReservaService(
     IReservaRepository reservas,
     IVueloRepository vuelos,
@@ -56,13 +56,13 @@ public class ReservaService(
         }
         catch (SqliteException ex) when (ex.SqliteErrorCode == ErrorDeRestriccion)
         {
-            // Dos personas eligieron el mismo asiento al mismo tiempo: las dos pasaron la regla 4,
-            // pero el índice único de la base solo deja entrar a la primera.
+            // Dos personas eligieron el mismo asiento al mismo tiempo: ambas operaciones superaron la regla 4,
+            // pero el índice único de la base solo admite la primera.
             logger.LogWarning("Choque de reservas: el asiento {Asiento} del vuelo {Numero} se ocupó recién", asiento, vuelo.Numero);
             throw new ReglaDeNegocioException("Asiento", $"El asiento {asiento} acaba de reservarse en otra operación. Debe elegirse otro asiento.", ex);
         }
 
-        // Log estructurado: {ReservaId} es un dato con nombre, no texto pegado con $"..."
+        // Log estructurado: {ReservaId} es un dato con nombre, no texto concatenado con $"..."
         logger.LogInformation("Reserva {ReservaId} confirmada: vuelo {Numero}, asiento {Asiento}, pasajero {PasajeroId}",
             reserva.Id, vuelo.Numero, asiento, pasajero.Id);
         return reserva;

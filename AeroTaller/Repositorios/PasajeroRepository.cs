@@ -83,9 +83,9 @@ public class PasajeroRepository(ConexionDb conexionDb) : IPasajeroRepository
         return comando.ExecuteNonQuery() > 0;
     }
 
-    // Si el pasajero tiene reservas, la clave foránea no deja borrarlo:
-    // SQLite lanza SqliteException y el repositorio NO la atrapa (no sabe qué hacer con ella).
-    // La decide el servicio (desafío 6).
+    // Si el pasajero tiene reservas, la clave foránea impide borrarlo:
+    // SQLite lanza SqliteException y el repositorio NO la captura (su manejo no le corresponde).
+    // Eso se resuelve en el servicio (desafío 6).
     public bool Eliminar(int id)
     {
         using var conexion = new SqliteConnection(cadenaConexion);

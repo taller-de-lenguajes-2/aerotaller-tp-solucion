@@ -1,7 +1,7 @@
 using System.Globalization;
 using Microsoft.Data.Sqlite;
 
-// La reserva junta todo: vuelo (con sus dos aeropuertos) + pasajero → JOIN de 4 tablas (5 con los alias).
+// La reserva reúne todo: vuelo (con sus dos aeropuertos) + pasajero → JOIN de 4 tablas (5 alias).
 public class ReservaRepository(ConexionDb conexionDb) : IReservaRepository
 {
     private readonly string cadenaConexion = conexionDb.Cadena;

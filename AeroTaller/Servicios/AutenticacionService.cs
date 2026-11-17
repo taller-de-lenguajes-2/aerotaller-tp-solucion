@@ -1,4 +1,4 @@
-// Iniciar y cerrar sesión, y saber quién está conectado (desafío 9, igual que en el tema 15).
+// Inicio y cierre de sesión, y consulta del usuario conectado (desafío 9, igual que en el tema 15).
 // Guarda los datos del usuario en la SESIÓN (en el servidor); el navegador solo tiene la cookie con el Id de sesión.
 public class AutenticacionService(
     IUsuarioRepository usuarios,
@@ -18,7 +18,7 @@ public class AutenticacionService(
         Usuario? usuario = usuarios.Obtener(nombreUsuario);
         if (usuario is null || usuario.Clave != clave)
         {
-            // Se registra el intento, NUNCA la clave que escribió
+            // Se registra el intento, NUNCA la clave ingresada
             logger.LogWarning("Login fallido para el usuario {NombreUsuario}", nombreUsuario);
             return false;
         }

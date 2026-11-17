@@ -25,7 +25,7 @@ public class ReservaIndexViewModel
 
 public class ReservaCrearViewModel
 {
-    // int? para que "sin selección" llegue como null y lo detecte [Required]
+    // int? para que la ausencia de selección llegue como null y la detecte [Required]
     [Display(Name = "Vuelo")]
     [Required(ErrorMessage = "El vuelo es obligatorio.")]
     public int? VueloId { get; set; }
@@ -39,7 +39,7 @@ public class ReservaCrearViewModel
     [RegularExpression(@"^\s*\d{1,2}[A-Fa-f]\s*$", ErrorMessage = "El asiento es la fila y una letra de la A a la F (ej.: 12C).")]
     public string Asiento { get; set; } = "";
 
-    // Las listas no vienen del usuario: no se validan, y hay que volver a cargarlas si el POST falla
+    // Las listas no las envía el usuario: no se validan (y deben recargarse si el POST falla)
     [ValidateNever] public List<SelectListItem> Vuelos { get; set; } = [];
     [ValidateNever] public List<SelectListItem> Pasajeros { get; set; } = [];
 }

@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-// El mismo formulario sirve para crear (Id null) y para editar (Id con valor)
+// El mismo formulario se usa para crear (Id null) y para editar (Id con valor)
 public class PasajeroFormViewModel
 {
     public int? Id { get; set; }
@@ -32,7 +32,7 @@ public class PasajeroFormViewModel
         Email = pasajero.Email;
     }
 
-    // ViewModel → entidad: el controlador traduce; el repositorio nunca ve un ViewModel
+    // ViewModel → entidad: el controlador realiza la conversión; el repositorio nunca recibe un ViewModel
     public Pasajero APasajero() => new()
     {
         Id = Id ?? 0,

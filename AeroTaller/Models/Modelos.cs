@@ -1,5 +1,5 @@
 // El dominio de AeroTaller (desafío 2).
-// Son clases "de negocio": no saben nada de SQL, de HTML ni de formularios.
+// Son clases "de negocio": no dependen de SQL, de HTML ni de formularios.
 
 public class Aeropuerto
 {
@@ -53,7 +53,7 @@ public class Pasajero
     public string? Email { get; set; }
 }
 
-// Un enum en vez de un string suelto: el compilador no deja escribir "Confirmda"
+// Un enum en vez de un string suelto: el compilador no permite escribir "Confirmda"
 public enum EstadoReserva
 {
     Confirmada,

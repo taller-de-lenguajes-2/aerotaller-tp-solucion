@@ -1,9 +1,9 @@
 -- ============================================================
 -- aerotaller.sql — base del TP AeroTaller
 -- Aeropuertos, vuelos, pasajeros, reservas, usuarios y equipaje.
--- Se puede ejecutar entero en DB Browser for SQLite
+-- Puede ejecutarse completo en DB Browser for SQLite
 -- (pestaña "Ejecutar SQL") o con:  sqlite3 aerotaller.db < aerotaller.sql
--- La aplicación lo ejecuta sola la primera vez (CrearBaseSiNoExiste en Program.cs).
+-- La aplicación lo ejecuta automáticamente la primera vez (CrearBaseSiNoExiste en Program.cs).
 -- ============================================================
 
 PRAGMA foreign_keys = ON;
@@ -48,20 +48,20 @@ CREATE TABLE Reserva (
     VueloId    INTEGER NOT NULL,
     PasajeroId INTEGER NOT NULL,
     Asiento    TEXT NOT NULL,              -- '12A'
-    Fecha      TEXT NOT NULL,              -- cuándo se hizo la reserva
+    Fecha      TEXT NOT NULL,              -- fecha en que se realizó la reserva
     Estado     TEXT NOT NULL DEFAULT 'Confirmada' CHECK (Estado IN ('Confirmada', 'Cancelada')),
     FOREIGN KEY (VueloId)    REFERENCES Vuelo(Id),
     FOREIGN KEY (PasajeroId) REFERENCES Pasajero(Id)
 );
 
--- Defensa en profundidad: aunque el servicio ya lo controla, la BASE no deja
+-- Defensa en profundidad: aunque el servicio ya lo controla, la BASE no admite
 -- dos reservas confirmadas en el mismo asiento del mismo vuelo (índice único parcial).
--- Si dos personas reservan a la vez, una de las dos recibe un SqliteException.
+-- Si dos personas reservan a la vez, una de las dos operaciones produce una SqliteException.
 CREATE UNIQUE INDEX UX_Reserva_AsientoConfirmado
     ON Reserva (VueloId, Asiento) WHERE Estado = 'Confirmada';
 
 -- Usuarios del sistema (no confundir con Pasajero: los pasajeros no inician sesión).
--- ⚠ Clave en texto plano SOLO para el TP (igual que en el tema 15). Ver "Para investigar" del desafío 9.
+-- Atención: clave en texto plano SOLO para el TP (igual que en el tema 15). Ver "Para investigar" del desafío 9.
 CREATE TABLE Usuario (
     Id            INTEGER PRIMARY KEY AUTOINCREMENT,
     NombreUsuario TEXT NOT NULL UNIQUE,
@@ -91,7 +91,7 @@ INSERT INTO Aeropuerto (Codigo, Ciudad, Nombre) VALUES
     ('SLA', 'Salta',                 'Martín Miguel de Güemes'),
     ('USH', 'Ushuaia',               'Malvinas Argentinas');
 
--- Las fechas se calculan a partir de HOY, así siempre hay vuelos futuros para reservar.
+-- Las fechas se calculan a partir de HOY, de modo que siempre haya vuelos futuros para reservar.
 -- strftime('%Y-%m-%d %H:%M', 'now', 'localtime', '+3 days', 'start of day', '+7 hours', '+30 minutes')
 --   → dentro de 3 días a las 07:30, en el formato 'AAAA-MM-DD HH:MM'
 INSERT INTO Vuelo (Numero, OrigenId, DestinoId, Salida, DuracionMinutos, Filas, Precio) VALUES

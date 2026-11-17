@@ -28,7 +28,7 @@ public class VueloRepository(ConexionDb conexionDb) : IVueloRepository
         return LeerVuelos(comando);
     }
 
-    // Filtros opcionales: el WHERE se arma solo con los que vinieron, pero SIEMPRE con parámetros
+    // Filtros opcionales: el WHERE se construye solo con los filtros recibidos, pero SIEMPRE con parámetros
     public List<Vuelo> Buscar(int? destinoId, DateTime? desde)
     {
         using var conexion = new SqliteConnection(cadenaConexion);

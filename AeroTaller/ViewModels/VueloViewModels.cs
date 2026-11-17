@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 // ViewModels de la pantalla de vuelos (desafío 4).
-// Un ViewModel por pantalla: tiene EXACTAMENTE lo que la vista necesita, ya formateado.
+// Un ViewModel por pantalla: contiene EXACTAMENTE los datos que la vista muestra, ya formateados.
 
 // Una fila del listado
 public class VueloListadoViewModel(Vuelo vuelo, int ocupados)
@@ -20,7 +20,7 @@ public class VueloListadoViewModel(Vuelo vuelo, int ocupados)
     public bool YaSalio { get; } = vuelo.YaSalio;
 }
 
-// La pantalla de búsqueda: el filtro (lo que manda el usuario) + los resultados
+// La pantalla de búsqueda: el filtro (lo que envía el usuario) + los resultados
 public class VueloIndexViewModel
 {
     [Display(Name = "Destino")]
@@ -37,7 +37,7 @@ public class VueloIndexViewModel
 // Un asiento del mapa
 public record AsientoViewModel(string Codigo, bool Ocupado);
 
-// El detalle con el mapa de asientos: una matriz Filas × 6 armada para que la vista solo tenga que dibujarla
+// El detalle con el mapa de asientos: una matriz Filas × 6 ya construida, de modo que la vista solo deba dibujarla
 public class VueloDetalleViewModel
 {
     public int Id { get; }

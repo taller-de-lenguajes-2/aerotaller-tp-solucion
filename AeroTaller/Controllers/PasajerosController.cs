@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-[RequiereLogin]   // todas las acciones piden sesión iniciada
+[RequiereLogin]   // todas las acciones requieren sesión iniciada
 public class PasajerosController(
     IPasajeroRepository pasajeros,
     IReservaRepository reservas,
@@ -57,7 +57,7 @@ public class PasajerosController(
     [ValidateAntiForgeryToken]
     public IActionResult Editar(int id, PasajeroFormViewModel modelo)
     {
-        modelo.Id = id;     // el Id lo manda la ruta, no un input que se pueda tocar
+        modelo.Id = id;     // el Id lo aporta la ruta, no un input que pueda modificarse
         if (!ModelState.IsValid) return View("Formulario", modelo);
 
         try
@@ -73,7 +73,7 @@ public class PasajerosController(
         }
     }
 
-    // Borrar cambia datos: es POST (nunca un link GET) y solo lo hace el Admin
+    // Borrar modifica datos: es POST (nunca un enlace GET) y solo puede hacerlo el Admin
     [HttpPost]
     [ValidateAntiForgeryToken]
     [RequiereRol(Roles.Admin)]

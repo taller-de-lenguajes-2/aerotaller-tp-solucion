@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-// El controlador queda "delgado" (desafío 6): recibe el formulario, llama al servicio y elige la vista.
+// El controlador queda "delgado" (desafío 6): recibe el formulario, invoca al servicio y selecciona la vista.
 // Las reglas (asiento libre, vuelo lleno…) NO están aquí: están en ReservaService.
 [RequiereLogin]
 public class ReservasController(
@@ -43,14 +43,14 @@ public class ReservasController(
     [ValidateAntiForgeryToken]
     public IActionResult Crear(ReservaCrearViewModel modelo)
     {
-        // 1 · Los atributos del ViewModel ya corrieron: si algo falló, ModelState lo tiene
+        // 1 · Los atributos del ViewModel ya se ejecutaron: si algo falló, ModelState lo registra
         if (!ModelState.IsValid)
         {
             CargarListas(modelo);
             return View(modelo);
         }
 
-        // 2 · Las reglas que necesitan la base las decide el servicio
+        // 2 · Las reglas que requieren consultar la base las evalúa el servicio
         try
         {
             Reserva reserva = reservaService.Reservar(modelo.VueloId!.Value, modelo.PasajeroId!.Value, modelo.Asiento);
@@ -59,7 +59,7 @@ public class ReservasController(
         }
         catch (ReglaDeNegocioException ex)
         {
-            // El servicio dice en qué campo está el problema: el error aparece al lado de ese input
+            // El servicio indica en qué campo está el problema: el error aparece al lado de ese input
             ModelState.AddModelError(ex.Campo, ex.Message);
             CargarListas(modelo);
             return View(modelo);

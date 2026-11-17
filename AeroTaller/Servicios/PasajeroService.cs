@@ -1,4 +1,4 @@
-// Reglas de los pasajeros: DNI único y no borrar a quien tiene reservas.
+// Reglas de los pasajeros: DNI único y no eliminar a un pasajero con reservas.
 public class PasajeroService(
     IPasajeroRepository pasajeros,
     IReservaRepository reservas,
@@ -27,8 +27,8 @@ public class PasajeroService(
 
     public void Eliminar(int id)
     {
-        // La regla se controla ANTES de ir a la base. Si igual se escapara, la clave foránea
-        // de SQLite haría de red de seguridad (con un SqliteException).
+        // La regla se controla ANTES de ir a la base. Si se escapara, la clave foránea
+        // de SQLite haría de red de seguridad (con una SqliteException).
         int cantidad = reservas.ListarPorPasajero(id).Count;
         if (cantidad > 0)
             throw new ReglaDeNegocioException("", $"No se puede eliminar: el pasajero tiene {cantidad} reserva(s).");

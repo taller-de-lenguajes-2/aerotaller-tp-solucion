@@ -1,6 +1,6 @@
-// La capa de servicios (desafío 6): las REGLAS DEL NEGOCIO viven aquí.
-// El controlador recibe el formulario y elige la vista; el repositorio habla SQL;
-// el servicio decide si algo se puede hacer ("¿ese asiento está libre?").
+// La capa de servicios (desafío 6): las REGLAS DEL NEGOCIO se concentran aquí.
+// El controlador recibe el formulario y selecciona la vista; el repositorio ejecuta el SQL;
+// el servicio evalúa si una operación está permitida ("¿ese asiento está libre?").
 // Si una regla no se cumple, el servicio lanza ReglaDeNegocioException.
 
 public interface IReservaService
